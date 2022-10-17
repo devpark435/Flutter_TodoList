@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_todo_application/Screens/todoListMain.dart';
+import 'screens/todoListMain.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
+//MARK: 실제 모든 스크린을 표현하는 위젯
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Pricy',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const todoListMain(title: 'Flutter Demo Home Page'),
+          scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
+          fontFamily: 'NotoSans'),
+      home: const todoListMain(),
     );
   }
 }

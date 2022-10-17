@@ -1,49 +1,78 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_todo_application/main.dart';
 
 class todoListMain extends StatefulWidget {
-  const todoListMain({super.key, required this.title});
-
-  final String title;
+  const todoListMain({super.key});
 
   @override
-  State<todoListMain> createState() => _MyHomePageState();
+  State<todoListMain> createState() => _todoListMain();
 }
 
-class _MyHomePageState extends State<todoListMain> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _todoListMain extends State<todoListMain> {
+  String input = "";
+  List<String> todos = [];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return GestureDetector(
+      child: Scaffold(
+          appBar: AppBar(
+            title: Text("Todo_List"),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                        title: Text("Add Todolist"),
+                        content: TextField(
+                          onChanged: (String value) {
+                            input = value;
+                          },
+                          keyboardType: TextInputType.name,
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  todos.add(input);
+                                });
+                                Navigator.of(context)
+                                    .pop(); // input 입력 후 창 닫히도록
+                              },
+                              child: Text("Add"))
+                        ]);
+                  });
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+          ),
+          body: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: todos.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 50,
+                  color: Colors.white,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("${todos[index]}"),
+                      IconButton(
+                        icon: (Icon(Icons.delete,
+                            color: Color.fromARGB(244, 255, 55, 15))),
+                        onPressed: () {
+                          setState(() {
+                            todos.removeAt(index);
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                );
+              })),
     );
   }
 }

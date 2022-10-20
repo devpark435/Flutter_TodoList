@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'screens/todoListMain.dart';
+import 'Screens/todoCalendar.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  runApp(const MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 //MARK: 실제 모든 스크린을 표현하는 위젯
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
           fontFamily: 'NotoSans'),
-      home: const todoListMain(),
+      home: const todoCalendar(),
     );
   }
 }

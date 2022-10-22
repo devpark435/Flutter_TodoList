@@ -14,6 +14,9 @@ class _todoCalendar extends State<todoCalendar> {
 
   DateTime _selectedDay = DateTime.now();
 
+  // String dayString = _selectedDay.toString();
+  // int selectDay = int.parse(_selectedDay.toString());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +25,11 @@ class _todoCalendar extends State<todoCalendar> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (builder) => todoListMain())),
+            context,
+            MaterialPageRoute(
+                builder: (builder) => todoListMain(
+                      day: _selectedDay,
+                    ))),
       ),
       body: SingleChildScrollView(
         child: Column(

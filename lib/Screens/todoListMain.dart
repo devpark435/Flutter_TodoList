@@ -3,7 +3,9 @@ import 'package:flutter_todo_application/main.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class todoListMain extends StatefulWidget {
-  const todoListMain({super.key});
+  const todoListMain({super.key, required this.day});
+
+  final DateTime day;
 
   @override
   State<todoListMain> createState() => _todoListMain();

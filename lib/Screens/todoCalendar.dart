@@ -12,6 +12,8 @@ class todoCalendar extends StatefulWidget {
 class _todoCalendar extends State<todoCalendar> {
   DateTime _focusedDay = DateTime.now();
 
+  DateTime _selectedDay = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,11 +35,15 @@ class _todoCalendar extends State<todoCalendar> {
                 focusedDay: _focusedDay,
                 locale: 'ko-KR',
                 startingDayOfWeek: StartingDayOfWeek.sunday,
-                onDaySelected: (date, events) {
-                  print(date.toUtc());
+                onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                  setState(() {
+                    _selectedDay = selectDay;
+                    _focusedDay = focusDay;
+                  });
+                  print(_focusedDay);
                 },
-                onPageChanged: (focusedDay) {
-                  _focusedDay = focusedDay;
+                selectedDayPredicate: (DateTime date) {
+                  return isSameDay(_selectedDay, date);
                 },
               ),
             ),

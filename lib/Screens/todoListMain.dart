@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_application/main.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+String input = "";
+List<String> todos = [];
+
 class todoListMain extends StatefulWidget {
   const todoListMain({super.key, required this.day});
-
   final DateTime day;
 
   @override
@@ -12,13 +14,14 @@ class todoListMain extends StatefulWidget {
 }
 
 class _todoListMain extends State<todoListMain> {
-  String input = "";
-  List<String> todos = [];
+  late String theDay = widget.day.toString();
+  late String theOnlyDay = theDay.replaceAll(" 00:00:00.000Z", "");
+  late List<String> toDayList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Todo_List"),
+        title: Text(theOnlyDay),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -37,7 +40,7 @@ class _todoListMain extends State<todoListMain> {
                       TextButton(
                           onPressed: () {
                             setState(() {
-                              todos.add(input);
+                              toDayList.add(input);
                             });
                             Navigator.of(context).pop(); // input 입력 후 창 닫히도록
                           },
@@ -52,7 +55,7 @@ class _todoListMain extends State<todoListMain> {
       ),
       body: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: todos.length,
+          itemCount: toDayList.length,
           itemBuilder: (BuildContext context, int index) {
             return Container(
               height: 50,
@@ -60,7 +63,7 @@ class _todoListMain extends State<todoListMain> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("${todos[index]}"),
+                  Text("${toDayList[index]}"),
                   IconButton(
                     icon: (Icon(Icons.delete,
                         color: Color.fromARGB(244, 255, 55, 15))),

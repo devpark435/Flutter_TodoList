@@ -74,7 +74,7 @@ class _todoListMain extends State<todoListMain> {
                           color: Color.fromARGB(244, 250, 98, 68))),
                       onPressed: () {
                         setState(() {
-                          todos.removeAt(index);
+                          toDayList.removeAt(index);
                         });
                       },
                     )

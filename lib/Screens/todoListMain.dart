@@ -95,6 +95,6 @@ void showToast(String msg) {
   Fluttertoast.showToast(
       msg: msg,
       backgroundColor: Color.fromARGB(255, 109, 106, 251),
-      textColor: Color.fromARGB(255, 0, 0, 0),
-      fontSize: 5.0);
+      textColor: Color.fromARGB(255, 215, 212, 212),
+      fontSize: 25.0);
 }

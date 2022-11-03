@@ -4,7 +4,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-List<String> todos = [];
+List<String> todos = new List(31);
 
 class todoListMain extends StatefulWidget {
   const todoListMain({super.key, required this.day});
@@ -18,9 +18,12 @@ class _todoListMain extends State<todoListMain> {
   late String theDay = widget.day.toString().substring(0, 10);
   late String toDay = theDay.substring(8, 10);
   String input = "";
+  // final Map<DateTime,List<String>>event=[
+
+  // ]
   /**String Input */
   // late String toDay = theDay
-  // late List<String> toDay = [];
+  late List<String> testDay = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +46,8 @@ class _todoListMain extends State<todoListMain> {
                           onPressed: () {
                             setState(() {
                               if (input != '') {
-                                todos.add(input);
+                                testDay[int.parse(toDay)] = input;
+                                todos.add(testDay[int.parse(toDay)]);
                                 input = '';
                               } else {
                                 showToast('Event Null');

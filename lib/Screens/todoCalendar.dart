@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'todoListMain.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class todoCalendar extends StatefulWidget {
   const todoCalendar({super.key});
@@ -33,7 +34,15 @@ class _todoCalendar extends State<todoCalendar> {
       ),
       body: SingleChildScrollView(
         child: Column(
+          // children: [
+          //   SfCalendar(
+          //     view: CalendarView.month,
+          //     onSelectionChanged: (calendarSelectionDetails) =>
+          //         isSameDay(_focusedDay, _selectedDay),
+          //   )
+          // ],
           children: [
+            //TableCalendar
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TableCalendar(
@@ -47,7 +56,7 @@ class _todoCalendar extends State<todoCalendar> {
                     _selectedDay = selectDay;
                     _focusedDay = focusDay;
                   });
-                  print(_focusedDay);
+                  print(_focusedDay.day);
                 },
                 selectedDayPredicate: (DateTime date) {
                   return isSameDay(_selectedDay, date);

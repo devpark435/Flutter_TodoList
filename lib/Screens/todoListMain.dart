@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo_application/main.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '/main.dart';
 
 String input = "";
+/**String Input */
+
 List<String> todos = [];
 
 class todoListMain extends StatefulWidget {
@@ -57,23 +60,26 @@ class _todoListMain extends State<todoListMain> {
           padding: const EdgeInsets.all(8),
           itemCount: toDayList.length,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
+            return Card(
+              // margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
               color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("${toDayList[index]}"),
-                  IconButton(
-                    icon: (Icon(Icons.delete,
-                        color: Color.fromARGB(244, 255, 55, 15))),
-                    onPressed: () {
-                      setState(() {
-                        todos.removeAt(index);
-                      });
-                    },
-                  )
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("${toDayList[index]}"),
+                    IconButton(
+                      icon: (Icon(Icons.delete,
+                          color: Color.fromARGB(244, 250, 98, 68))),
+                      onPressed: () {
+                        setState(() {
+                          todos.add(input);
+                        });
+                      },
+                    )
+                  ],
+                ),
               ),
             );
           }),

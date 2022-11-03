@@ -5,6 +5,10 @@ import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   initializeDateFormatting().then((_) => runApp(MyApp()));
+  List<String> todo(String a) {
+    final List<String> a = <String>[];
+    return a;
+  }
 }
 
 //MARK: 실제 모든 스크린을 표현하는 위젯

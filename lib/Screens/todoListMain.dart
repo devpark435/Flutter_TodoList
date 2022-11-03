@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo_application/main.dart';
 import 'package:table_calendar/table_calendar.dart';
 import '/main.dart';
-
-String input = "";
-/**String Input */
+import 'package:fluttertoast/fluttertoast.dart';
 
 List<String> todos = [];
 
@@ -17,22 +15,23 @@ class todoListMain extends StatefulWidget {
 }
 
 class _todoListMain extends State<todoListMain> {
-  late String theDay = widget.day.toString();
-  late String theOnlyDay = theDay.replaceAll(" 00:00:00.000Z", "");
-  late List<String> toDayList = [];
+  late String theDay = widget.day.toString().substring(0, 10);
+  late String toDay = theDay.substring(8, 10);
+  String input = "";
+  /**String Input */
+  // late String toDay = theDay
+  // late List<String> toDay = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(theOnlyDay),
-      ),
+      appBar: AppBar(title: Text(theDay)),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                    title: Text("Add Todolist"),
+                    title: Text("Add Todolist at ${toDay}"),
                     content: TextField(
                       onChanged: (String value) {
                         input = value;
@@ -43,7 +42,12 @@ class _todoListMain extends State<todoListMain> {
                       TextButton(
                           onPressed: () {
                             setState(() {
-                              toDayList.add(input);
+                              if (input != '') {
+                                todos.add(input);
+                                input = '';
+                              } else {
+                                showToast('Event Null');
+                              }
                             });
                             Navigator.of(context).pop(); // input 입력 후 창 닫히도록
                           },
@@ -58,7 +62,7 @@ class _todoListMain extends State<todoListMain> {
       ),
       body: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: toDayList.length,
+          itemCount: todos.length,
           itemBuilder: (BuildContext context, int index) {
             return Card(
               // margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -68,13 +72,13 @@ class _todoListMain extends State<todoListMain> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("${toDayList[index]}"),
+                    Text("${todos[index]}"),
                     IconButton(
                       icon: (Icon(Icons.delete,
                           color: Color.fromARGB(244, 250, 98, 68))),
                       onPressed: () {
                         setState(() {
-                          toDayList.removeAt(index);
+                          todos.removeAt(index);
                         });
                       },
                     )
@@ -85,4 +89,12 @@ class _todoListMain extends State<todoListMain> {
           }),
     );
   }
+}
+
+void showToast(String msg) {
+  Fluttertoast.showToast(
+      msg: msg,
+      backgroundColor: Color.fromARGB(255, 109, 106, 251),
+      textColor: Color.fromARGB(255, 0, 0, 0),
+      fontSize: 5.0);
 }

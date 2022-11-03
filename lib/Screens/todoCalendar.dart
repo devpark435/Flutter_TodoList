@@ -14,6 +14,7 @@ class _todoCalendar extends State<todoCalendar> {
   DateTime _focusedDay = DateTime.now();
 
   DateTime _selectedDay = DateTime.now();
+  // var _toDay = _focusedDay.day;
 
   // String dayString = _selectedDay.toString();
   // int selectDay = int.parse(_selectedDay.toString());
@@ -29,7 +30,7 @@ class _todoCalendar extends State<todoCalendar> {
             context,
             MaterialPageRoute(
                 builder: (builder) => todoListMain(
-                      day: _selectedDay,
+                      day: _focusedDay,
                     ))),
       ),
       body: SingleChildScrollView(
@@ -56,7 +57,9 @@ class _todoCalendar extends State<todoCalendar> {
                     _selectedDay = selectDay;
                     _focusedDay = focusDay;
                   });
-                  print(_focusedDay.day);
+                  var day = _focusedDay.day;
+                  print(day);
+                  // todos.add(List<String>day=[] )
                 },
                 selectedDayPredicate: (DateTime date) {
                   return isSameDay(_selectedDay, date);

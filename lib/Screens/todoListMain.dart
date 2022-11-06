@@ -7,8 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 List<String> todos = [];
 // var todos = <String>[](31);
 const cols = 31;
-const rows = 12;
-var i = 0;
+const rows = 31;
+// var i = 0;
 List<List<String>> todoArray = List.generate(
     rows, (i) => List.generate(cols + 1, (j) => '', growable: false),
     growable: false);
@@ -32,6 +32,7 @@ class _todoListMain extends State<todoListMain> {
   /**String Input */
   // late String onlyDay = theDay
   late List<String> testDay = [];
+  var i = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

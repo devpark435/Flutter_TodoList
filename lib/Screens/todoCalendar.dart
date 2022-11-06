@@ -95,24 +95,26 @@ class _todoCalendar extends State<todoCalendar> {
               //     //       [int.parse(i)])
               //   ],
               // ),
-              child: Container(
-                height: 100,
-                child: ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    padding: EdgeInsets.zero,
-                    itemCount: 100,
-                    itemBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: 50,
-                        child: Card(
-                            shadowColor: Colors.amber,
-                            child: Center(
-                              child: Text(todoArray[
-                                      int.parse(_selectedDay.day.toString())]
-                                  [index]),
-                            )),
-                      );
-                    }),
+              child: SingleChildScrollView(
+                child: Container(
+                  height: 10000,
+                  child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      padding: EdgeInsets.zero,
+                      itemCount: todoArray == null ? 0 : todoArray.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: 80,
+                          child: Card(
+                              shadowColor: Colors.amber,
+                              child: Center(
+                                child: Text(todoArray[
+                                        int.parse(_selectedDay.day.toString())]
+                                    [index]),
+                              )),
+                        );
+                      }),
+                ),
               ),
               // ),
             )

@@ -3,6 +3,8 @@ import 'package:table_calendar/table_calendar.dart';
 import 'todoListMain.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
+var i = 0;
+
 class todoCalendar extends StatefulWidget {
   const todoCalendar({super.key});
 
@@ -66,9 +68,65 @@ class _todoCalendar extends State<todoCalendar> {
                 },
               ),
             ),
+            Padding(
+              padding: EdgeInsets.all(10),
+              // child: Container(
+              //   width: MediaQuery.of(context).size.width * 0.9,
+              //   decoration: BoxDecoration(
+              //       color: Colors.white,
+              //       borderRadius: BorderRadius.circular(5.0),
+              //       shape: BoxShape.rectangle,
+              //       boxShadow: [
+              //         BoxShadow(
+              //             blurRadius: 0,
+              //             color: Color.fromARGB(255, 113, 113, 113),
+              //             offset: Offset(0, 5))
+              //       ]),
+              // child: Column(
+              //   children: [
+              //     Text('당일 투두리스트 나올곳'),
+
+              //     // for (var i;
+              //     //     i <=
+              //     //         todoArray?[int.parse(_focusedDay.day.toString())][i]
+              //     //             .length;
+              //     //     i++)
+              //     //   Text(todoArray[int.parse(_focusedDay.day.toString())]
+              //     //       [int.parse(i)])
+              //   ],
+              // ),
+              child: Container(
+                height: 100,
+                child: ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.zero,
+                    itemCount: 100,
+                    itemBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: 50,
+                        child: Card(
+                            shadowColor: Colors.amber,
+                            child: Center(
+                              child: Text(todoArray[
+                                      int.parse(_selectedDay.day.toString())]
+                                  [index]),
+                            )),
+                      );
+                    }),
+              ),
+              // ),
+            )
           ],
         ),
       ),
     );
   }
+}
+
+void dayWhile(int i) {
+  int j = 0;
+  do {
+    Text(todoArray[i][j]);
+    j++;
+  } while (todoArray[i][j] == '');
 }

@@ -8,7 +8,7 @@ List<String> todos = [];
 // var todos = <String>[](31);
 const cols = 31;
 const rows = 12;
-
+var i = 0;
 List<List<String>> todoArray = List.generate(
     rows, (i) => List.generate(cols + 1, (j) => '', growable: false),
     growable: false);
@@ -25,7 +25,7 @@ class _todoListMain extends State<todoListMain> {
   late String theDay = widget.day.toString().substring(0, 10);
   late int onlyDay = int.parse(theDay.substring(8, 10));
   String input = "";
-  var i = 0;
+
   // final Map<DateTime,List<String>>event=[
 
   // ]
@@ -42,7 +42,7 @@ class _todoListMain extends State<todoListMain> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                    title: Text('$todoArray'), //"Add Todolist at ${onlyDay}"
+                    title: Text('오늘은 이거할거양'), //"Add Todolist at ${onlyDay}"
                     content: TextField(
                       onChanged: (String value) {
                         input = value;
@@ -57,7 +57,7 @@ class _todoListMain extends State<todoListMain> {
                                 todoArray[onlyDay][i] = input;
                                 input = '';
                                 i = i + 1;
-                              } else {
+                              } else if (todoArray[onlyDay][i] == '') {
                                 showToast('Event Null');
                               }
                             });

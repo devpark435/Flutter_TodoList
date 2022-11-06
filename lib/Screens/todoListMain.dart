@@ -4,7 +4,14 @@ import 'package:table_calendar/table_calendar.dart';
 import '/main.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-List<String> todos = new List(31);
+List<String> todos = [];
+// var todos = <String>[](31);
+const cols = 31;
+const rows = 12;
+
+List<List<String>> todoArray = List.generate(
+    rows, (i) => List.generate(cols + 1, (j) => '', growable: false),
+    growable: false);
 
 class todoListMain extends StatefulWidget {
   const todoListMain({super.key, required this.day});
@@ -16,13 +23,14 @@ class todoListMain extends StatefulWidget {
 
 class _todoListMain extends State<todoListMain> {
   late String theDay = widget.day.toString().substring(0, 10);
-  late String toDay = theDay.substring(8, 10);
+  late int onlyDay = int.parse(theDay.substring(8, 10));
   String input = "";
+  var i = 0;
   // final Map<DateTime,List<String>>event=[
 
   // ]
   /**String Input */
-  // late String toDay = theDay
+  // late String onlyDay = theDay
   late List<String> testDay = [];
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,7 @@ class _todoListMain extends State<todoListMain> {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                    title: Text("Add Todolist at ${toDay}"),
+                    title: Text('$todoArray'), //"Add Todolist at ${onlyDay}"
                     content: TextField(
                       onChanged: (String value) {
                         input = value;
@@ -46,9 +54,9 @@ class _todoListMain extends State<todoListMain> {
                           onPressed: () {
                             setState(() {
                               if (input != '') {
-                                testDay[int.parse(toDay)] = input;
-                                todos.add(testDay[int.parse(toDay)]);
+                                todoArray[onlyDay][i] = input;
                                 input = '';
+                                i = i + 1;
                               } else {
                                 showToast('Event Null');
                               }
@@ -66,30 +74,36 @@ class _todoListMain extends State<todoListMain> {
       ),
       body: ListView.builder(
           padding: const EdgeInsets.all(8),
-          itemCount: todos.length,
+          itemCount: todoArray[onlyDay].length,
           itemBuilder: (BuildContext context, int index) {
-            return Card(
-              // margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("${todos[index]}"),
-                    IconButton(
-                      icon: (Icon(Icons.delete,
-                          color: Color.fromARGB(244, 250, 98, 68))),
-                      onPressed: () {
-                        setState(() {
-                          todos.removeAt(index);
-                        });
-                      },
-                    )
-                  ],
+            if (todoArray[onlyDay][index] != '') {
+              return SizedBox(
+                child: Card(
+                  // margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                  color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("${todoArray[onlyDay][index]}"),
+                        IconButton(
+                          icon: (Icon(Icons.delete,
+                              color: Color.fromARGB(244, 250, 98, 68))),
+                          onPressed: () {
+                            setState(() {
+                              todoArray[onlyDay][index] = '';
+                            });
+                          },
+                        )
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              return SizedBox.shrink();
+            }
           }),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screens/todoListMain.dart';
 import 'Screens/todoCalendar.dart';
 import 'package:intl/date_symbol_data_local.dart';
+
 const cols = 31;
 const rows = 12;
 
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pricy',
       theme: ThemeData(
+          useMaterial3: true,
           scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
           fontFamily: 'NotoSans'),
       home: const todoCalendar(),
